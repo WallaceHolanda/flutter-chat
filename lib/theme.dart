@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 abstract class AppColors {
   static const secondary = Color(0xFF3B76F6);
@@ -21,4 +22,47 @@ abstract class _LightColors {
 abstract class _DarkColors {
   static const background = Color(0xFF1B1E1F);
   static const card = AppColors.cardDark;
+}
+
+abstract class AppTheme {
+  static const accentColor = AppColors.accent;
+  static final visualDensity = VisualDensity.adaptivePlatformDensity;
+
+  /// Tema Light e suas configurações
+  static ThemeData light(ThemeData theme) => ThemeData(
+        brightness: Brightness.light,
+        visualDensity: visualDensity,
+        textTheme: GoogleFonts.mulishTextTheme(theme.textTheme).apply(
+          bodyColor: AppColors.textDark,
+        ),
+        scaffoldBackgroundColor: _LightColors.background,
+        cardColor: _LightColors.card,
+        primaryTextTheme: const TextTheme(
+          titleLarge: TextStyle(color: AppColors.textDark),
+        ),
+        iconTheme: const IconThemeData(color: AppColors.iconDark),
+        colorScheme: ColorScheme.fromSwatch()
+            .copyWith(secondary: accentColor)
+            .copyWith(background: _LightColors.background),
+      );
+
+  /// Tema Dark e suas configurações
+  static ThemeData dark(ThemeData theme) => ThemeData(
+        brightness: Brightness.dark,
+        visualDensity: visualDensity,
+        textTheme: GoogleFonts.interTextTheme(theme.textTheme).apply(
+          bodyColor: AppColors.textLigth,
+        ),
+        scaffoldBackgroundColor: _DarkColors.background,
+        cardColor: _DarkColors.card,
+        primaryTextTheme: const TextTheme(
+          titleLarge: TextStyle(
+            color: AppColors.textLigth,
+          ),
+        ),
+        iconTheme: const IconThemeData(color: AppColors.iconLight),
+        colorScheme: ColorScheme.fromSwatch()
+            .copyWith(secondary: accentColor)
+            .copyWith(background: _DarkColors.background),
+      );
 }
