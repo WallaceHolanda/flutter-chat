@@ -17,7 +17,7 @@ class BottomNavigationBarWidgetState extends State<BottomNavigationBarWidget> {
     setState(() {
       selectedIndex = index;
     });
-    widget.onItemSelected;
+    widget.onItemSelected(index);
   }
 
   @override
