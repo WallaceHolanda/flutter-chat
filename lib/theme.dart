@@ -34,6 +34,7 @@ abstract class AppTheme {
       textTheme: GoogleFonts.mulishTextTheme().apply(
         bodyColor: AppColors.textDark,
       ),
+      primaryColor: AppColors.textDark,
       scaffoldBackgroundColor: _LightColors.background,
       cardColor: _LightColors.card,
       primaryTextTheme: const TextTheme(
@@ -46,6 +47,7 @@ abstract class AppTheme {
 
   static ThemeData dark() => ThemeData(
         visualDensity: visualDensity,
+        primaryColor: AppColors.textLigth,
         textTheme: GoogleFonts.interTextTheme().apply(
           bodyColor: AppColors.textLigth,
         ),
