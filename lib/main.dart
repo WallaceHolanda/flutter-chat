@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
       darkTheme: AppTheme.dark(),
       themeMode: ThemeMode.dark,
       title: 'Flutter Chat',
-      home: HomeScreen(),
+      home: const HomeScreen(),
     );
   }
 }
