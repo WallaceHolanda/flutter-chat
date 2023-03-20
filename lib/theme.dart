@@ -28,29 +28,27 @@ abstract class AppTheme {
   static const accentColor = AppColors.accent;
   static final visualDensity = VisualDensity.adaptivePlatformDensity;
 
-  /// Tema Light e suas configurações
-  static ThemeData light(ThemeData theme) => ThemeData(
-        brightness: Brightness.light,
-        visualDensity: visualDensity,
-        textTheme: GoogleFonts.mulishTextTheme(theme.textTheme).apply(
-          bodyColor: AppColors.textDark,
-        ),
-        scaffoldBackgroundColor: _LightColors.background,
-        cardColor: _LightColors.card,
-        primaryTextTheme: const TextTheme(
-          titleLarge: TextStyle(color: AppColors.textDark),
-        ),
-        iconTheme: const IconThemeData(color: AppColors.iconDark),
-        colorScheme: ColorScheme.fromSwatch()
-            .copyWith(secondary: accentColor)
-            .copyWith(background: _LightColors.background),
-      );
+  static ThemeData light() => ThemeData(
+      brightness: Brightness.light,
+      visualDensity: visualDensity,
+      textTheme: GoogleFonts.mulishTextTheme().apply(
+        bodyColor: AppColors.textDark,
+      ),
+      primaryColor: AppColors.textDark,
+      scaffoldBackgroundColor: _LightColors.background,
+      cardColor: _LightColors.card,
+      primaryTextTheme: const TextTheme(
+        titleLarge: TextStyle(color: AppColors.textDark),
+      ),
+      iconTheme: const IconThemeData(color: AppColors.iconDark),
+      colorScheme: ColorScheme.fromSwatch()
+          .copyWith(secondary: accentColor)
+          .copyWith(background: _LightColors.background));
 
-  /// Tema Dark e suas configurações
-  static ThemeData dark(ThemeData theme) => ThemeData(
-        brightness: Brightness.dark,
+  static ThemeData dark() => ThemeData(
         visualDensity: visualDensity,
-        textTheme: GoogleFonts.interTextTheme(theme.textTheme).apply(
+        primaryColor: AppColors.textLigth,
+        textTheme: GoogleFonts.interTextTheme().apply(
           bodyColor: AppColors.textLigth,
         ),
         scaffoldBackgroundColor: _DarkColors.background,
@@ -63,6 +61,7 @@ abstract class AppTheme {
         iconTheme: const IconThemeData(color: AppColors.iconLight),
         colorScheme: ColorScheme.fromSwatch()
             .copyWith(secondary: accentColor)
-            .copyWith(background: _DarkColors.background),
+            .copyWith(background: _DarkColors.background)
+            .copyWith(brightness: Brightness.dark),
       );
 }
