@@ -16,10 +16,106 @@ class MessagesPage extends StatelessWidget {
           child: _Stories(),
         ),
         SliverList(
-          delegate: SliverChildBuilderDelegate(
-            (BuildContext context, int index) {
-              return const Text('Mensagens');
-            },
+          delegate: SliverChildBuilderDelegate(_delegate),
+        ),
+      ],
+    );
+  }
+
+  Widget _delegate(BuildContext context, int index) {
+    final Faker faker = Faker();
+    final date = Helpers.randomDate();
+    return _MessageTile(
+      messageData: MessageData(
+        senderName: faker.person.name(),
+        message: faker.lorem.sentence(),
+        messageDate: date,
+        dateMessage: "${(date.hour % 24) + 1} Hours Ago",
+        profilePicture: Helpers.randomPictureUrl(),
+      ),
+    );
+  }
+}
+
+class _MessageTile extends StatelessWidget {
+  const _MessageTile({required this.messageData});
+
+  final MessageData messageData;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Avatar.medium(url: messageData.profilePicture),
+        ),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 6.0),
+                child: Text(
+                  messageData.senderName,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    letterSpacing: 0.2,
+                    wordSpacing: 1.5,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 20,
+                child: Text(
+                  messageData.message,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(
+                    fontSize: 12,
+                    color: AppColors.textFaded,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(right: 20.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text(
+                messageData.dateMessage.toUpperCase(),
+                style: const TextStyle(
+                  fontSize: 11,
+                  letterSpacing: -0.2,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.textFaded,
+                ),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Container(
+                width: 18,
+                height: 18,
+                decoration: const BoxDecoration(
+                  color: AppColors.secondary,
+                  shape: BoxShape.circle,
+                ),
+                child: const Center(
+                  child: Text(
+                    '1',
+                    style: TextStyle(
+                      fontSize: 10,
+                      color: AppColors.textLigth,
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ],
